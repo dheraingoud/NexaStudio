@@ -1,0 +1,48 @@
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS Generated
+.DS_Store
+Thumbs.db
+
+# Environment & Secrets
+.env
+.env.*
+*.local
+
+# Build Artifacts
+dist/
+build/
+target/
+*.jar
+*.war
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+logs/
+
+# ═══════════════════════════════════════════════════════════════════
+# EXCLUDE FROM REPO - Local files only
+# ═══════════════════════════════════════════════════════════════════
+.claude/
+.github/
+CLAUDE.md
+DEPLOYMENT.md
+*.png
+*.jpg
+*.docx
+nexastudio_drawio_flow.xml
+Project_Report_*.md
+!frontend-react/**
+!backend-java/**
+fake_anthropic.py
+run-claude-proxy.ps1
+generate_report_docx.py
+backend.txt
