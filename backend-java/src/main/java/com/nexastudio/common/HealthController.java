@@ -19,17 +19,8 @@ public class HealthController {
     @Value("${gemini.api.key:}")
     private String geminiKey;
 
-    @Value("${nvidia.qwen.api.key:}")
-    private String qwenKey;
-
-    @Value("${nvidia.glm.api.key:}")
-    private String glmKey;
-
-    @Value("${nvidia.deepseek.api.key:}")
-    private String deepseekKey;
-
-    @Value("${nvidia.kimi.api.key:}")
-    private String kimiKey;
+    @Value("${nvidia.api.key:}")
+    private String nvidiaKey;
 
     /**
      * Basic health check
@@ -45,11 +36,8 @@ public class HealthController {
 
         // AI model availability
         Map<String, Boolean> models = new LinkedHashMap<>();
+        models.put("nvidia", isPresent(nvidiaKey));
         models.put("gemini", isPresent(geminiKey));
-        models.put("qwen", isPresent(qwenKey));
-        models.put("glm", isPresent(glmKey));
-        models.put("deepseek", isPresent(deepseekKey));
-        models.put("kimi", isPresent(kimiKey));
         healthData.put("aiModels", models);
 
         return ResponseEntity.ok(ApiResponse.success(healthData));

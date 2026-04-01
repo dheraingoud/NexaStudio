@@ -44,12 +44,11 @@ RUN chown -R nexastudio:nexastudio /app
 # Switch to non-root user
 USER nexastudio
 
-# Expose the application port
-EXPOSE 8080
+# Expose the application port (Render uses PORT env var, typically 10000)
+EXPOSE ${PORT:-10000}
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-    CMD wget --quiet --tries=1 --spider http://localhost:8080/actuator/health || exit 1
+# Note: Render performs its own health checks, so we disable Docker's internal healthcheck
+# to avoid conflicts. Render will hit /api/health endpoint directly.
 
 # ─────────────────────────────────────────────────────────────────────
 # Environment Variables (set via Render dashboard, NOT here)
@@ -73,5 +72,5 @@ ENV JAVA_OPTS="-XX:+UseContainerSupport \
     -Djava.security.egd=file:/dev/./urandom \
     -Dspring.profiles.active=production"
 
-# Run the application
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+# Run the application (reads PORT from environment)
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dserver.port=${PORT:-10000} -jar app.jar"]
