@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 public class ProjectService {
 
     private static final Logger log = LoggerFactory.getLogger(ProjectService.class);
+    private static final int MAX_ERROR_MESSAGE_LENGTH = 1000;
 
     private final ProjectRepository projectRepository;
     private final FileRepository fileRepository;
@@ -291,13 +292,20 @@ public class ProjectService {
         prompt.setAiResponse(response);
         prompt.setTokensUsed(tokensUsed);
         prompt.setProcessingTimeMs(processingTime);
-        prompt.setErrorMessage(error);
+        prompt.setErrorMessage(trimToMaxLength(error, MAX_ERROR_MESSAGE_LENGTH));
         
         if (status == PromptEntity.PromptStatus.COMPLETED || status == PromptEntity.PromptStatus.FAILED) {
             prompt.setCompletedAt(Instant.now());
         }
         
         promptRepository.save(prompt);
+    }
+
+    private String trimToMaxLength(String value, int maxLength) {
+        if (value == null || value.length() <= maxLength) {
+            return value;
+        }
+        return value.substring(0, maxLength);
     }
 
     /**

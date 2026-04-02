@@ -49,16 +49,17 @@ public class AuthService {
      */
     @Transactional
     public AuthResponse register(RegisterRequest request) {
-        log.info("Registering new user: {}", request.getUsername());
+        String normalizedUsername = request.getUsername().trim().toLowerCase();
+        log.info("Registering new user: {}", normalizedUsername);
         
         // Check if username already exists
-        if (userService.usernameExists(request.getUsername())) {
+        if (userService.usernameExists(normalizedUsername)) {
             throw new ValidationException("Username is already taken");
         }
 
         // Create new user
         UserEntity user = UserEntity.builder()
-                .username(request.getUsername().toLowerCase().trim())
+                .username(normalizedUsername)
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .role(UserEntity.UserRole.USER)
                 .plan(UserEntity.UserPlan.FREE)
@@ -76,23 +77,24 @@ public class AuthService {
      */
     @Transactional
     public AuthResponse login(LoginRequest request) {
-        log.info("Login attempt for: {}", request.getUsername());
+        String normalizedUsername = request.getUsername().trim().toLowerCase();
+        log.info("Login attempt for: {}", normalizedUsername);
         
         try {
             // Authenticate with Spring Security
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            request.getUsername(),
+                            normalizedUsername,
                             request.getPassword()
                     )
             );
         } catch (BadCredentialsException e) {
-            log.warn("Login failed for: {}", request.getUsername());
+            log.warn("Login failed for: {}", normalizedUsername);
             throw new BadCredentialsException("Invalid username or password");
         }
 
         // Get user and update last login
-        UserEntity user = userService.findByUsername(request.getUsername());
+        UserEntity user = userService.findByUsername(normalizedUsername);
         userService.updateLastLogin(user.getId());
         
         log.info("User logged in successfully: {}", user.getId());

@@ -30,11 +30,19 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const original = error.config;
+    const original = error.config || {};
+    const requestUrl: string = original.url || '';
+    const isAuthRoute = requestUrl.includes('/auth/login') || requestUrl.includes('/auth/register') || requestUrl.includes('/auth/refresh');
     
     // Handle 401 with refresh token retry
     if (error.response?.status === 401 && !original._retry) {
       original._retry = true;
+
+      // Never auto-logout while authenticating; surface the error to the form UI.
+      if (isAuthRoute) {
+        return Promise.reject(error);
+      }
+
       const refreshToken = localStorage.getItem('nexa_refresh_token');
       
       if (refreshToken) {
@@ -43,6 +51,7 @@ api.interceptors.response.use(
           const newToken = res.data?.data?.accessToken || res.data?.accessToken;
           if (newToken) {
             localStorage.setItem('nexa_token', newToken);
+            original.headers = original.headers || {};
             original.headers.Authorization = `Bearer ${newToken}`;
             return api(original); // Retry original request with new token
           }
@@ -99,6 +108,7 @@ export const authApi = {
   logout: () => {
     localStorage.removeItem('nexa_token');
     localStorage.removeItem('nexa_user');
+    localStorage.removeItem('nexa_refresh_token');
   },
 };
 

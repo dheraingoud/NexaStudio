@@ -1,6 +1,6 @@
 import { lazy, Suspense, Component } from 'react';
 import type { ReactNode, ErrorInfo } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useAuthStore } from './lib/store';
 
 // Layout (keep eager — it's always needed)
@@ -69,11 +69,17 @@ class AppErrorBoundary extends Component<{ children: ReactNode }, { hasError: bo
   }
 }
 
+function hasStoredToken() {
+  if (typeof window === 'undefined') return false;
+  return Boolean(localStorage.getItem('nexa_token'));
+}
+
 // Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthStore();
+  const hasToken = hasStoredToken();
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated && !hasToken) {
     return <Navigate to="/login" replace />;
   }
 
@@ -83,12 +89,23 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 // Public Route Component (redirect if authenticated)
 function PublicRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthStore();
+  const hasToken = hasStoredToken();
 
-  if (isAuthenticated) {
+  if (isAuthenticated || hasToken) {
     return <Navigate to="/dashboard" replace />;
   }
 
   return <>{children}</>;
+}
+
+function ProjectEntryRedirect() {
+  const { id } = useParams<{ id: string }>();
+
+  if (!id) {
+    return <Navigate to="/projects" replace />;
+  }
+
+  return <Navigate to={`/projects/${id}/generate`} replace />;
 }
 
 export default function App() {
@@ -127,7 +144,8 @@ export default function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/projects" element={<ProjectsListPage />} />
             <Route path="/projects/new" element={<NewProjectPage />} />
-            {/* Removed ambiguous Redirect project detail to generate page to fix circular match */}
+            {/* Canonical project entry route */}
+            <Route path="/projects/:id" element={<ProjectEntryRedirect />} />
             <Route path="/projects/:id/generate" element={<GeneratePage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>

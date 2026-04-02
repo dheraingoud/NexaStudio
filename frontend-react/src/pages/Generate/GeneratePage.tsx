@@ -21,6 +21,7 @@ import {
   PanelLeftOpen,
   Bot,
   FolderOpen,
+  AlertTriangle,
 } from 'lucide-react';
 import { projectsApi } from '../../lib/api';
 import { useProjectStore } from '../../lib/store';
@@ -135,6 +136,8 @@ export default function GeneratePage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasTriggeredInitial, setHasTriggeredInitial] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<{ title: string; message: string } | null>(null);
+  const [reloadTick, setReloadTick] = useState(0);
   const [thinkingStep, setThinkingStep] = useState(0);
 
   // Files state
@@ -150,7 +153,7 @@ export default function GeneratePage() {
   const [showChat, setShowChat] = useState(true);
   const [previewKey, setPreviewKey] = useState(0);
   const generationAbortFn = useRef<(() => void) | null>(null);
-  const loadedIdRef = useRef<string | null>(null);
+  const loadedKeyRef = useRef<string | null>(null);
   const [chatWidth, setChatWidth] = useState(() => window.innerWidth >= 1280 ? 420 : 340);
   const isResizing = useRef(false);
   const [isResizingState, setIsResizingState] = useState(false);
@@ -528,13 +531,21 @@ export default function GeneratePage() {
 
   /* ─── Load project, files, and chat history ─── */
   useEffect(() => {
-    if (!id || loadedIdRef.current === id) return;
-    loadedIdRef.current = id;
+    if (!id) return;
+
+    const loadKey = `${id}:${reloadTick}`;
+    if (loadedKeyRef.current === loadKey) return;
+    loadedKeyRef.current = loadKey;
+
     setIsLoading(true);
+    setLoadError(null);
 
     const timeout = setTimeout(() => {
       setIsLoading(false);
-      setMessages([{ id: generateId(), role: 'assistant', content: 'The backend is taking longer than expected. Please check your connection.', timestamp: new Date(), status: 'error' }]);
+      setLoadError({
+        title: 'Project loading timed out',
+        message: 'The backend is taking longer than expected. Please retry.',
+      });
     }, 30000);
 
     Promise.all([
@@ -613,16 +624,27 @@ export default function GeneratePage() {
 
       setMessages(historyMessages.length > 0 ? [...welcomeMessages, ...historyMessages] : welcomeMessages);
       setIsLoading(false);
-    }).catch((err) => {
-      console.error("[GeneratePage] Load error:", err);
+    }).catch((err: unknown) => {
       clearTimeout(timeout);
       setIsLoading(false);
-      loadedIdRef.current = null;
-      // navigate('/projects');
+      loadedKeyRef.current = null;
+
+      const status = (err as { response?: { status?: number } })?.response?.status;
+      if (status === 404) {
+        setLoadError({ title: 'Project not found', message: 'This project may have been deleted or is no longer accessible.' });
+        return;
+      }
+
+      if (status === 403) {
+        setLoadError({ title: 'Access denied', message: 'You do not have permission to access this project.' });
+        return;
+      }
+
+      setLoadError({ title: 'Unable to load project', message: 'We could not load this project right now. Please retry.' });
     });
 
     return () => clearTimeout(timeout);
-  }, [id, setCurrentProject, navigate]);
+  }, [id, setCurrentProject, reloadTick]);
 
   /* ─── Auto-trigger initial prompt from NewProjectPage ─── */
   useEffect(() => {
@@ -1174,6 +1196,34 @@ window.addEventListener('unhandledrejection',function(e){if(!document.getElement
     );
   }
 
+  if (loadError) {
+    return (
+      <div className="h-full w-full flex items-center justify-center bg-[#09080e] p-6">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="max-w-md w-full rounded-2xl border border-red-500/20 bg-red-500/5 p-6 text-center">
+          <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-4">
+            <AlertTriangle className="w-5 h-5 text-red-300" />
+          </div>
+          <h2 className="text-lg font-semibold text-lilac-100 mb-2">{loadError.title}</h2>
+          <p className="text-sm text-lilac-300/70 mb-6">{loadError.message}</p>
+          <div className="flex items-center justify-center gap-2">
+            <button
+              onClick={() => setReloadTick((v) => v + 1)}
+              className="px-4 py-2 rounded-lg bg-mauve-500/20 text-mauve-200 hover:bg-mauve-500/30 transition-colors text-sm"
+            >
+              Retry
+            </button>
+            <button
+              onClick={() => navigate('/projects')}
+              className="px-4 py-2 rounded-lg border border-lilac-200/15 text-lilac-200/70 hover:bg-lilac-200/5 transition-colors text-sm"
+            >
+              Back to Projects
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
   return (
     <div className="h-full w-full flex max-md:flex-col overflow-hidden bg-[#09080e]">
 
@@ -1266,7 +1316,7 @@ window.addEventListener('unhandledrejection',function(e){if(!document.getElement
           <div className="flex items-center gap-2">
             {!showChat && (
               <>
-                <button onClick={() => navigate(`/projects/${id}`)} className="p-1.5 rounded-md text-lilac-400/50 hover:text-lilac-300 hover:bg-lilac-200/8 transition-colors"><ArrowLeft className="w-4 h-4" /></button>
+                <button onClick={() => navigate('/projects')} className="p-1.5 rounded-md text-lilac-400/50 hover:text-lilac-300 hover:bg-lilac-200/8 transition-colors"><ArrowLeft className="w-4 h-4" /></button>
                 <button onClick={() => setShowChat(true)} className="p-1.5 rounded-md text-lilac-400/50 hover:text-lilac-300 hover:bg-lilac-200/8 transition-colors" title="Show chat" aria-label="Show chat panel"><PanelLeftOpen className="w-4 h-4" /></button>
                 <div className="w-px h-5 bg-lilac-200/8 mx-1" />
               </>
