@@ -317,16 +317,39 @@ public class ProjectService {
      * Helper method to find project and verify user access
      */
     private ProjectEntity findProjectForUser(UUID userId, UUID projectId) {
-        return projectRepository.findByIdAndUserId(projectId, userId)
+        ProjectEntity project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResourceNotFoundException("Project", projectId));
+        
+        // Null-safety check for project owner
+        if (project.getUser() == null || project.getUser().getId() == null) {
+            log.error("Project {} has null owner — data integrity issue", projectId);
+            throw new org.springframework.security.access.AccessDeniedException(
+                    "Project owner data is corrupt. Please contact support.");
+        }
+        
+        if (!project.getUser().getId().equals(userId)) {
+            throw new org.springframework.security.access.AccessDeniedException("Access denied to this project.");
+        }
+        
+        return project;
     }
 
     /**
      * Helper method to verify user has access to project
      */
     private void verifyProjectAccess(UUID userId, UUID projectId) {
-        if (!projectRepository.existsByIdAndUserId(projectId, userId)) {
-            throw new ResourceNotFoundException("Project", projectId);
+        ProjectEntity project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Project", projectId));
+        
+        // Null-safety check for project owner
+        if (project.getUser() == null || project.getUser().getId() == null) {
+            log.error("Project {} has null owner — data integrity issue", projectId);
+            throw new org.springframework.security.access.AccessDeniedException(
+                    "Project owner data is corrupt. Please contact support.");
+        }
+        
+        if (!project.getUser().getId().equals(userId)) {
+            throw new org.springframework.security.access.AccessDeniedException("Access denied to this project.");
         }
     }
 }

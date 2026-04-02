@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
@@ -12,12 +12,16 @@ import {
   ChevronRight,
   Clock,
   Layers,
+  Eye,
+  Code2,
+  AlertTriangle,
 } from 'lucide-react';
 import { Button, GlassCard, Badge } from '../../components/ui';
 import { projectsApi } from '../../lib/api';
 import { useProjectStore } from '../../lib/store';
 import { formatDate, formatRelativeTime, getFrameworkLabel, cn } from '../../lib/utils';
 import { FrameworkIcon } from '../../components/ui';
+import type { AxiosError } from 'axios';
 
 /* ── helpers ──────────────────────────────────────────────── */
 interface FileNode { name: string; path: string; type: 'file' | 'folder'; children?: FileNode[] }
@@ -83,40 +87,76 @@ export default function ProjectDetailPage() {
   const { currentProject, setCurrentProject, removeProject } = useProjectStore();
   const [isLoading, setIsLoading] = useState(true);
   const [files, setFiles] = useState<string[]>([]);
+  const [fileContents, setFileContents] = useState<Record<string, string>>({});
   const [selectedFile, setSelectedFile] = useState('');
   const [fileContent, setFileContent] = useState('');
   const [loadingFile, setLoadingFile] = useState(false);
+  const [errorState, setErrorState] = useState<{ type: 'notFound' | 'forbidden' | 'error'; message?: string } | null>(null);
+  const [viewTab, setViewTab] = useState<'code' | 'preview'>('code');
+  const [showResumeBanner, setShowResumeBanner] = useState(false);
 
   useEffect(() => {
     if (!id) return;
     const load = async () => {
       setIsLoading(true);
+      setErrorState(null);
       try {
         const [pRes, fRes] = await Promise.all([
           projectsApi.getById(id),
           projectsApi.getFiles(id).catch(() => ({ data: [] })),
         ]);
         setCurrentProject(pRes.data);
-        // Backend returns FileDTO[] with { path, name, ... } - extract paths
+        // Backend returns FileDTO[] with { path, name, content, ... } - extract paths and content
         const rawFiles = fRes.data || [];
-        const filePaths = Array.isArray(rawFiles)
-          ? rawFiles.map((f: { path?: string } | string) => (typeof f === 'string' ? f : f?.path || '')).filter(Boolean)
-          : [];
+        const filePaths: string[] = [];
+        const contents: Record<string, string> = {};
+        if (Array.isArray(rawFiles)) {
+          for (const f of rawFiles) {
+            const path = typeof f === 'string' ? f : f?.path || '';
+            if (path) {
+              filePaths.push(path);
+              if (typeof f === 'object' && f?.content) {
+                contents[path] = f.content;
+              }
+            }
+          }
+        }
         setFiles(filePaths);
+        setFileContents(contents);
         if (filePaths.length > 0) setSelectedFile(filePaths[0]);
-      } catch (err) {
+        
+        // Check for interrupted generation
+        const pending = localStorage.getItem(`nexa_gen_${id}`);
+        if (pending === 'pending') {
+          setShowResumeBanner(true);
+        }
+      } catch (err: unknown) {
         console.error('Failed to load project:', err);
-        navigate('/projects');
+        const status = (err as AxiosError)?.response?.status;
+        if (status === 404) {
+          setErrorState({ type: 'notFound', message: 'Project not found. It may have been deleted.' });
+        } else if (status === 403) {
+          setErrorState({ type: 'forbidden', message: 'You do not have access to this project.' });
+        } else {
+          setErrorState({ type: 'error', message: 'Failed to load project. Please try again.' });
+        }
       } finally {
         setIsLoading(false);
       }
     };
     load();
-  }, [id, setCurrentProject, navigate]);
+  }, [id, setCurrentProject]);
 
   // load file content when selection changes
   useEffect(() => {
     if (!id || !selectedFile) return;
+    
+    // Check if we already have content from the initial load
+    if (fileContents[selectedFile]) {
+      setFileContent(fileContents[selectedFile]);
+      return;
+    }
+    
     const loadFile = async () => {
       setLoadingFile(true);
       try {
@@ -127,6 +167,8 @@ export default function ProjectDetailPage() {
           ? data
           : (data?.content || JSON.stringify(data, null, 2));
         setFileContent(content);
+        // Cache it
+        setFileContents(prev => ({ ...prev, [selectedFile]: content }));
       } catch (err) {
         console.error('Failed to load file:', err);
         setFileContent('// Unable to load file');
@@ -135,12 +177,21 @@ export default function ProjectDetailPage() {
       }
     };
     loadFile();
-  }, [id, selectedFile]);
+  }, [id, selectedFile, fileContents]);
 
   const handleDelete = async () => {
     if (!id || !confirm('Delete this project permanently?')) return;
     try { await projectsApi.delete(id); removeProject(id); navigate('/projects'); } catch { }
   };
+
+  // Get index.html content for preview
+  const indexHtmlContent = useMemo(() => {
+    const indexPath = files.find(f => f.endsWith('index.html'));
+    if (indexPath && fileContents[indexPath]) {
+      return fileContents[indexPath];
+    }
+    return null;
+  }, [files, fileContents]);
 
   const tree = buildTree(files);
   const fw = currentProject?.type || currentProject?.framework || '';
@@ -157,6 +208,32 @@ export default function ProjectDetailPage() {
     );
   }
 
+  // Error states with user-friendly messages
+  if (errorState) {
+    return (
+      <div className="max-w-md mx-auto text-center py-20">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-red-500/10 flex items-center justify-center">
+          <AlertTriangle className="w-8 h-8 text-red-400" />
+        </div>
+        <h2 className="text-xl font-semibold text-lilac-100 mb-2">
+          {errorState.type === 'notFound' ? 'Project Not Found' : 
+           errorState.type === 'forbidden' ? 'Access Denied' : 'Something Went Wrong'}
+        </h2>
+        <p className="text-lilac-300/60 mb-6">{errorState.message}</p>
+        <div className="flex gap-3 justify-center">
+          <Link to="/projects">
+            <Button variant="secondary">Go to Projects</Button>
+          </Link>
+          {errorState.type === 'error' && (
+            <Button variant="primary" onClick={() => window.location.reload()}>
+              Try Again
+            </Button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   if (!currentProject) {
     return (
       <div className="text-center py-20">
@@ -168,6 +245,31 @@ export default function ProjectDetailPage() {
 
   return (
     <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-7xl mx-auto">
+      {/* Resume banner for interrupted generation */}
+      {showResumeBanner && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-4 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-3"
+        >
+          <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0" />
+          <p className="text-sm text-amber-200 flex-1">
+            Generation was interrupted. Click &quot;AI Generate&quot; to resume.
+          </p>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              localStorage.removeItem(`nexa_gen_${id}`);
+              setShowResumeBanner(false);
+            }}
+            className="text-amber-400"
+          >
+            Dismiss
+          </Button>
+        </motion.div>
+      )}
+
       {/* back */}
       <motion.button
         variants={rise}
@@ -228,7 +330,7 @@ export default function ProjectDetailPage() {
           )}
         </GlassCard>
 
-        {/* code viewer */}
+        {/* code viewer / preview */}
         <GlassCard className="lg:col-span-3 overflow-hidden flex flex-col max-h-[600px]">
           {/* tab bar */}
           <div className="flex items-center gap-3 px-4 py-2.5 border-b border-lilac-200/8 bg-lilac-200/[0.02]">
@@ -237,24 +339,90 @@ export default function ProjectDetailPage() {
               <div className="w-2.5 h-2.5 rounded-full bg-amber-500/60" />
               <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
             </div>
-            {selectedFile && (
-              <span className="text-xs text-lilac-300/55 font-mono">{selectedFile}</span>
+            
+            {/* View mode tabs */}
+            <div className="flex gap-1 ml-2">
+              <button
+                onClick={() => setViewTab('code')}
+                className={cn(
+                  'flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium transition-colors',
+                  viewTab === 'code'
+                    ? 'bg-mauve-500/20 text-mauve-300'
+                    : 'text-lilac-400/50 hover:text-lilac-300 hover:bg-lilac-200/5'
+                )}
+              >
+                <Code2 className="w-3.5 h-3.5" />
+                Code
+              </button>
+              <button
+                onClick={() => setViewTab('preview')}
+                className={cn(
+                  'flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium transition-colors',
+                  viewTab === 'preview'
+                    ? 'bg-mauve-500/20 text-mauve-300'
+                    : 'text-lilac-400/50 hover:text-lilac-300 hover:bg-lilac-200/5'
+                )}
+              >
+                <Eye className="w-3.5 h-3.5" />
+                Preview
+              </button>
+            </div>
+            
+            {viewTab === 'code' && selectedFile && (
+              <span className="text-xs text-lilac-300/55 font-mono ml-auto">{selectedFile}</span>
             )}
           </div>
+          
           {/* content */}
-          <div className="flex-1 overflow-auto p-5 font-mono text-sm leading-relaxed">
-            {loadingFile ? (
-              <div className="space-y-2">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <div key={i} className="h-4 skeleton rounded" style={{ width: `${40 + Math.random() * 50}%` }} />
-                ))}
+          <div className="flex-1 overflow-auto">
+            {viewTab === 'code' ? (
+              <div className="p-5 font-mono text-sm leading-relaxed">
+                {loadingFile ? (
+                  <div className="space-y-2">
+                    {Array.from({ length: 12 }).map((_, i) => (
+                      <div key={i} className="h-4 skeleton rounded" style={{ width: `${40 + Math.random() * 50}%` }} />
+                    ))}
+                  </div>
+                ) : fileContent ? (
+                  <pre className="text-lilac-200/85 whitespace-pre-wrap">{fileContent}</pre>
+                ) : (
+                  <div className="flex flex-col items-center justify-center h-full text-lilac-400/30">
+                    <Layers className="w-10 h-10 mb-3" />
+                    <p className="text-sm">Select a file to view</p>
+                  </div>
+                )}
               </div>
-            ) : fileContent ? (
-              <pre className="text-lilac-200/85 whitespace-pre-wrap">{fileContent}</pre>
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-lilac-400/30">
-                <Layers className="w-10 h-10 mb-3" />
-                <p className="text-sm">Select a file to view</p>
+              <div className="h-full">
+                {indexHtmlContent ? (
+                  <iframe
+                    title="Live Preview"
+                    srcDoc={indexHtmlContent}
+                    sandbox="allow-scripts allow-same-origin"
+                    className="w-full h-full min-h-[500px] bg-white"
+                  />
+                ) : currentProject?.previewUrl ? (
+                  <div className="flex flex-col items-center justify-center h-full p-8">
+                    <p className="text-sm text-lilac-300/50 mb-4">Preview available at external URL</p>
+                    <a
+                      href={currentProject.previewUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button variant="primary" leftIcon={<Eye className="w-4 h-4" />}>
+                        Open Live Preview ↗
+                      </Button>
+                    </a>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center h-full text-lilac-400/30 p-8">
+                    <Eye className="w-10 h-10 mb-3" />
+                    <p className="text-sm text-center">
+                      Preview not available yet.<br />
+                      <span className="text-xs">Generate an index.html file or a Vanilla project to enable preview.</span>
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </div>

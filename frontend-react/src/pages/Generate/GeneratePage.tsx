@@ -349,6 +349,9 @@ export default function GeneratePage() {
     if (!userPrompt.trim() || !id || isGenerating) return;
     userScrolledUp.current = false;
 
+    // Track generation state in localStorage for recovery
+    localStorage.setItem(`nexa_gen_${id}`, 'pending');
+
     const assistantMessage: ChatMessage = { id: generateId(), role: 'assistant', content: '', timestamp: new Date(), status: 'thinking' };
     const streamedFiles: GeneratedFile[] = [];
 
@@ -423,6 +426,10 @@ export default function GeneratePage() {
 
       onComplete: (response) => {
         const processingTime = Date.now() - startTime;
+        
+        // Clear generation tracking - completed successfully
+        localStorage.removeItem(`nexa_gen_${id}`);
+        
         setMessages(prev => prev.map(m =>
           m.id === assistantMessage.id ? {
             ...m,
@@ -452,6 +459,10 @@ export default function GeneratePage() {
 
       onError: (message) => {
         const processingTime = Date.now() - startTime;
+        
+        // Mark generation as errored in localStorage
+        localStorage.setItem(`nexa_gen_${id}`, `error:${message}`);
+        
         setMessages(prev => prev.map(m =>
           m.id === assistantMessage.id ? {
             ...m,
@@ -498,8 +509,12 @@ export default function GeneratePage() {
     if (abortFn) {
       abortFn();
       generationAbortFn.current = null;
+      // Clear pending state when user manually stops
+      if (id) {
+        localStorage.removeItem(`nexa_gen_${id}`);
+      }
     }
-  }, []);
+  }, [id]);
 
   /* ─── Load project, files, and chat history ─── */
   useEffect(() => {

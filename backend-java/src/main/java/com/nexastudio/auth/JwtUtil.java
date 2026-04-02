@@ -154,12 +154,15 @@ public class JwtUtil {
     }
 
     /**
-     * Get the signing key from secret
+     * Get the signing key from secret.
+     * Uses UTF-8 bytes directly, padded to minimum 32 bytes for HS256 security.
      */
     private SecretKey getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(
-            java.util.Base64.getEncoder().encodeToString(secret.getBytes())
-        );
+        byte[] keyBytes = secret.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        // Ensure minimum 32 bytes for HS256 algorithm
+        if (keyBytes.length < 32) {
+            keyBytes = java.util.Arrays.copyOf(keyBytes, 32);
+        }
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

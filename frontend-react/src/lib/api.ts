@@ -29,13 +29,39 @@ api.interceptors.response.use(
     }
     return response;
   },
-  (error) => {
-    // Handle auth errors — redirect to login
-    if (error.response?.status === 401 || error.response?.status === 403) {
+  async (error) => {
+    const original = error.config;
+    
+    // Handle 401 with refresh token retry
+    if (error.response?.status === 401 && !original._retry) {
+      original._retry = true;
+      const refreshToken = localStorage.getItem('nexa_refresh_token');
+      
+      if (refreshToken) {
+        try {
+          const res = await axios.post(`${API_BASE_URL}/auth/refresh`, { refreshToken });
+          const newToken = res.data?.data?.accessToken || res.data?.accessToken;
+          if (newToken) {
+            localStorage.setItem('nexa_token', newToken);
+            original.headers.Authorization = `Bearer ${newToken}`;
+            return api(original); // Retry original request with new token
+          }
+        } catch {
+          // Refresh failed, fall through to logout
+        }
+      }
+      
+      // No refresh token or refresh failed — logout
       useAuthStore.getState().logout();
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
+    }
+    
+    // Handle 403 separately — don't auto-logout, let the UI handle it
+    if (error.response?.status === 403) {
+      // Let the calling code handle 403 errors appropriately
+      return Promise.reject(error);
     }
 
     // Map raw errors to human-friendly messages

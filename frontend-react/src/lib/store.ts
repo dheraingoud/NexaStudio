@@ -25,7 +25,7 @@ interface AuthState {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
-  login: (user: User, token: string) => void;
+  login: (user: User, token: string, refreshToken?: string) => void;
   logout: () => void;
 }
 
@@ -53,14 +53,18 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       token: null,
       isAuthenticated: false,
-      login: (user, token) => {
+      login: (user, token, refreshToken?) => {
         localStorage.setItem('nexa_token', token);
         localStorage.setItem('nexa_user', JSON.stringify(user));
+        if (refreshToken) {
+          localStorage.setItem('nexa_refresh_token', refreshToken);
+        }
         set({ user, token, isAuthenticated: true });
       },
       logout: () => {
         localStorage.removeItem('nexa_token');
         localStorage.removeItem('nexa_user');
+        localStorage.removeItem('nexa_refresh_token');
         set({ user: null, token: null, isAuthenticated: false });
       },
     }),
