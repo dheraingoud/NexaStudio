@@ -115,7 +115,9 @@ public class NextJsScaffoldService {
               "dependencies": {
                 "next": "14.2.0",
                 "react": "^18.2.0",
-                "react-dom": "^18.2.0"
+                "react-dom": "^18.2.0",
+                "framer-motion": "^11.0.0",
+                "lucide-react": "^0.321.0"
               },
               "devDependencies": {
                 "@types/node": "^20.11.0",

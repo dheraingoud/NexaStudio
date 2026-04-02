@@ -924,7 +924,9 @@ public class FrameworkScaffoldService {
             "react-dom": "^18.3.1",
             "react-router-dom": "^6.22.0",
             "clsx": "^2.1.0",
-            "tailwind-merge": "^2.2.0"
+            "tailwind-merge": "^2.2.0",
+            "framer-motion": "^11.0.0",
+            "lucide-react": "^0.321.0"
           },
           "devDependencies": {
             "@types/react": "^18.3.0",

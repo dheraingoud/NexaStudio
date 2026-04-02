@@ -451,16 +451,30 @@ public class PromptTemplates {
                         **Footer:**
                         - border-t border-zinc-800/50 bg-zinc-950, multi-column grid, muted links text-zinc-500 hover:text-white
 
-                        ### Animation & Micro-Interactions (REQUIRED for premium feel)
-                        - ALL buttons: transition-all duration-200, hover:-translate-y-0.5, hover:shadow-lg
-                        - Cards on hover: hover:scale-[1.02] hover:shadow-2xl transition-all duration-300
-                        - Page sections: use CSS animate-fade-in (opacity 0→1 over 0.5s) on scroll
-                        - Loading: animate-pulse for skeletons
+                        ### Animation & Micro-Interactions (MANDATORY - Not optional!)
+                        Your designs MUST be stunning, animated, sleek, and modern. Every UI should feel premium and polished.
+                        
+                        **Required Animations:**
+                        - ALL buttons: transition-all duration-200, hover:-translate-y-0.5, hover:shadow-lg hover:shadow-violet-500/20
+                        - Cards on hover: hover:scale-[1.02] hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-300
+                        - Page sections: stagger fade-in animations on scroll (opacity 0→1, translateY(20px)→0)
+                        - Loading states: animate-pulse for skeletons, spinning icons for loading buttons
                         - Use Tailwind's built-in animations: animate-bounce, animate-pulse, animate-spin
-                        - For React projects: use framer-motion for entrance animations where appropriate
-                          (motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }})
-                        - Links: underline-offset-4 hover:text-violet-400 transition-colors
+                        - For React/Next.js projects: ALWAYS use framer-motion for page entrance animations
+                          Example: motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+                          Stagger children: variants={{ container: { staggerChildren: 0.1 } }}
+                        - Links: transition-colors hover:text-violet-400 underline-offset-4
                         - Focus rings: focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950
+                        - Form inputs: focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all
+                        - Icons: group-hover:rotate-12 transition-transform for playful effects
+                        
+                        **Visual Enhancements (REQUIRED):**
+                        - Add gradient text for all major headings (bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-400)
+                        - Add backdrop-blur-xl glass effects to cards and modals
+                        - Add decorative gradient orbs behind hero sections (absolute -z-10 blur-3xl opacity-20)
+                        - Add subtle border gradients: border border-transparent bg-gradient-to-r from-violet-500/20 to-purple-500/20
+                        - Add glow effects on primary CTAs: shadow-lg shadow-violet-500/30
+                        - Use smooth hover transitions (duration-200 for buttons, duration-300 for cards)
 
                         ### Icon Usage
                         - For React/Next.js/Solid/Remix: use lucide-react icons (import { Icon } from 'lucide-react')
@@ -473,13 +487,15 @@ public class PromptTemplates {
                         1. ALWAYS dark theme (bg-zinc-950) — NEVER white/light backgrounds
                         2. NEVER use generic gray — use zinc scale exclusively (zinc-50 through zinc-950)
                         3. NEVER flat design — always add depth with borders, shadows, blur, gradients
-                        4. EVERY interactive element needs hover + focus states
+                        4. EVERY interactive element needs hover + focus states with smooth transitions
                         5. EVERY section needs consistent py-24 padding
                         6. ALWAYS add subtle glow/blur orbs behind hero sections
                         7. Use rounded-xl or rounded-2xl — NEVER sharp corners (rounded-none) or tiny radius (rounded-sm)
                         8. Max content width: max-w-7xl for grids, max-w-4xl for centered text
                         9. The design should look sophisticated even with placeholder content
                         10. Add visual hierarchy: gradient headings for h1, white for h2, zinc-300 for body
+                        11. EVERY page must have entrance animations - NO static, boring UIs
+                        12. Add micro-interactions on ALL clickable elements
 
                         ## Responsive Breakpoints
                         - sm: 640px, md: 768px, lg: 1024px, xl: 1280px
