@@ -1,0 +1,145 @@
+- generic [ref=e7]:
+  - complementary [ref=e8]:
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - img [ref=e16]
+          - generic [ref=e31]: NexaStudio
+        - button "Collapse sidebar" [ref=e32]:
+          - img [ref=e34]
+      - link "New Project" [ref=e36] [cursor=pointer]:
+        - /url: /projects/new
+        - generic [ref=e37]:
+          - img [ref=e38]
+          - generic [ref=e39]: New Project
+      - navigation [ref=e40]:
+        - link "Dashboard" [ref=e41] [cursor=pointer]:
+          - /url: /dashboard
+          - generic [ref=e42]:
+            - img [ref=e43]
+            - generic [ref=e48]: Dashboard
+        - link "Projects" [ref=e49] [cursor=pointer]:
+          - /url: /projects
+          - generic [ref=e50]:
+            - img [ref=e52]
+            - generic [ref=e54]: Projects
+      - generic [ref=e55]:
+        - link "Settings" [ref=e56] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e57]:
+            - img [ref=e58]
+            - generic [ref=e61]: Settings
+        - button "Logout" [ref=e62]:
+          - img [ref=e63]
+          - generic [ref=e66]: Logout
+      - generic [ref=e68]:
+        - generic [ref=e69]: D
+        - paragraph [ref=e70]: "@dheraingoud_"
+  - main [ref=e71]:
+    - generic [ref=e73]:
+      - button "Back" [ref=e74]:
+        - img [ref=e75]
+        - text: Back
+      - paragraph [ref=e79]: Step 3 of 4
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - heading "Pick your pages" [level=1] [ref=e181]
+          - button "Skip" [ref=e182]:
+            - img [ref=e183]
+            - text: Skip
+        - paragraph [ref=e185]: Select one or more page types to build a multi-page website, or skip to start from scratch.
+        - generic [ref=e186]:
+          - button "Landing Page Hero, features, testimonials, CTA & footer" [ref=e187]:
+            - generic [ref=e188]:
+              - img [ref=e190]
+              - generic [ref=e192]: Landing Page
+            - paragraph [ref=e193]: Hero, features, testimonials, CTA & footer
+          - button "Dashboard Sidebar, stats, charts & data tables" [ref=e194]:
+            - generic [ref=e195]:
+              - img [ref=e197]
+              - generic [ref=e199]: Dashboard
+            - paragraph [ref=e200]: Sidebar, stats, charts & data tables
+          - button "E-Commerce Product grid, cart, detail & checkout" [ref=e201]:
+            - generic [ref=e202]:
+              - img [ref=e204]
+              - generic [ref=e207]: E-Commerce
+            - paragraph [ref=e208]: Product grid, cart, detail & checkout
+            - img [ref=e344]
+          - button "Portfolio Project gallery, about & contact form" [ref=e209]:
+            - generic [ref=e210]:
+              - img [ref=e212]
+              - generic [ref=e216]: Portfolio
+            - paragraph [ref=e217]: Project gallery, about & contact form
+          - button "Blog Post list, detail, categories & search" [ref=e218]:
+            - generic [ref=e219]:
+              - img [ref=e221]
+              - generic [ref=e223]: Blog
+            - paragraph [ref=e224]: Post list, detail, categories & search
+          - button "SaaS App Pricing, features & auth pages" [ref=e225]:
+            - generic [ref=e226]:
+              - img [ref=e228]
+              - generic [ref=e231]: SaaS App
+            - paragraph [ref=e232]: Pricing, features & auth pages
+          - button "Admin Panel CRUD tables, forms & user management" [ref=e233]:
+            - generic [ref=e234]:
+              - img [ref=e236]
+              - generic [ref=e248]: Admin Panel
+            - paragraph [ref=e249]: CRUD tables, forms & user management
+        - generic [ref=e250]:
+          - generic [ref=e251]:
+            - generic [ref=e252]:
+              - img [ref=e253]
+              - paragraph [ref=e259]: Color Scheme
+            - generic [ref=e260]:
+              - button "Modern Dark" [ref=e261]: Modern Dark
+              - button "Vibrant" [ref=e267]: Vibrant
+              - button "Minimal Light" [ref=e273]: Minimal Light
+              - button "Corporate Blue" [ref=e279]: Corporate Blue
+              - button "Warm Sunset" [ref=e285]: Warm Sunset
+              - button "Forest Green" [ref=e291]: Forest Green
+          - generic [ref=e297]:
+            - paragraph [ref=e298]: Design Style
+            - generic [ref=e299]:
+              - button "Glassmorphism" [ref=e300]
+              - button "Flat / Minimal" [ref=e301]
+              - button "Neumorphism" [ref=e302]
+              - button "Material Design" [ref=e303]
+              - button "Brutalist" [ref=e304]
+          - generic [ref=e305]:
+            - paragraph [ref=e306]: Animation & Effects
+            - generic [ref=e307]:
+              - button "Smooth Animations Fluid page transitions & micro-interactions framer-motion" [active] [ref=e308]:
+                - generic [ref=e309]:
+                  - img [ref=e310]
+                  - generic [ref=e313]: Smooth Animations
+                - paragraph [ref=e314]: Fluid page transitions & micro-interactions
+                - paragraph [ref=e315]: framer-motion
+                - img [ref=e347]
+              - button "Scroll Animations Elements animate as you scroll down the page gsap" [ref=e316]:
+                - generic [ref=e317]:
+                  - img [ref=e318]
+                  - generic [ref=e320]: Scroll Animations
+                - paragraph [ref=e321]: Elements animate as you scroll down the page
+                - paragraph [ref=e322]: gsap
+              - button "Glass Design Frosted glass cards & translucent overlays" [ref=e323]:
+                - generic [ref=e324]:
+                  - img [ref=e325]
+                  - generic [ref=e329]: Glass Design
+                - paragraph [ref=e330]: Frosted glass cards & translucent overlays
+              - button "3D & Depth Perspective transforms, parallax, depth layers" [ref=e331]:
+                - generic [ref=e332]:
+                  - img [ref=e333]
+                  - generic [ref=e336]: 3D & Depth
+                - paragraph [ref=e337]: Perspective transforms, parallax, depth layers
+              - button "Minimal & Clean Focus on typography, whitespace & content" [ref=e338]:
+                - generic [ref=e339]:
+                  - img [ref=e340]
+                  - generic [ref=e341]: Minimal & Clean
+                - paragraph [ref=e342]: Focus on typography, whitespace & content
+      - generic [ref=e94]:
+        - button "Back" [ref=e173]:
+          - img [ref=e174]
+          - text: Back
+        - button "Continue" [ref=e95]:
+          - text: Continue
+          - img [ref=e96]

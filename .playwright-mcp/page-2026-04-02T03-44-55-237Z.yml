@@ -1,0 +1,38 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e12]
+          - generic [ref=e27]: NexaStudio
+        - button "Collapse sidebar" [ref=e28]:
+          - img [ref=e30]
+      - link "New Project" [ref=e32] [cursor=pointer]:
+        - /url: /projects/new
+        - generic [ref=e33]:
+          - img [ref=e34]
+          - generic [ref=e35]: New Project
+      - navigation [ref=e36]:
+        - link "Dashboard" [ref=e37] [cursor=pointer]:
+          - /url: /dashboard
+          - generic [ref=e38]:
+            - img [ref=e39]
+            - generic [ref=e44]: Dashboard
+        - link "Projects" [ref=e45] [cursor=pointer]:
+          - /url: /projects
+          - generic [ref=e46]:
+            - img [ref=e48]
+            - generic [ref=e50]: Projects
+      - generic [ref=e51]:
+        - link "Settings" [ref=e52] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e53]:
+            - img [ref=e54]
+            - generic [ref=e57]: Settings
+        - button "Logout" [ref=e58]:
+          - img [ref=e59]
+          - generic [ref=e62]: Logout
+      - generic [ref=e64]:
+        - generic [ref=e65]: D
+        - paragraph [ref=e66]: "@dheraingoud_"
+  - main [ref=e67]

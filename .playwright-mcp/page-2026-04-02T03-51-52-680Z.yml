@@ -1,0 +1,69 @@
+- generic [ref=e7]:
+  - complementary [ref=e8]:
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - img [ref=e16]
+          - generic [ref=e31]: NexaStudio
+        - button "Collapse sidebar" [ref=e32]:
+          - img [ref=e34]
+      - link "New Project" [ref=e36] [cursor=pointer]:
+        - /url: /projects/new
+        - generic [ref=e37]:
+          - img [ref=e38]
+          - generic [ref=e39]: New Project
+      - navigation [ref=e40]:
+        - link "Dashboard" [ref=e41] [cursor=pointer]:
+          - /url: /dashboard
+          - generic [ref=e42]:
+            - img [ref=e43]
+            - generic [ref=e48]: Dashboard
+        - link "Projects" [ref=e49] [cursor=pointer]:
+          - /url: /projects
+          - generic [ref=e50]:
+            - img [ref=e52]
+            - generic [ref=e54]: Projects
+      - generic [ref=e55]:
+        - link "Settings" [ref=e56] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e57]:
+            - img [ref=e58]
+            - generic [ref=e61]: Settings
+        - button "Logout" [ref=e62]:
+          - img [ref=e63]
+          - generic [ref=e66]: Logout
+      - generic [ref=e68]:
+        - generic [ref=e69]: D
+        - paragraph [ref=e70]: "@dheraingoud_"
+  - main [ref=e71]:
+    - generic [ref=e73]:
+      - button "Back" [ref=e74]:
+        - img [ref=e75]
+        - text: Back
+      - paragraph [ref=e79]: Step 4 of 4
+      - generic [ref=e349]:
+        - heading "Describe what to build" [level=1] [ref=e350]
+        - paragraph [ref=e351]: Customize the template with your specific requirements, or leave blank for defaults.
+        - textbox "e.g. Use blue and purple colors, add a testimonials carousel…" [ref=e353]
+        - generic [ref=e354]:
+          - paragraph [ref=e355]: Summary
+          - generic [ref=e356]:
+            - generic [ref=e357]:
+              - generic [ref=e358]: Name
+              - generic [ref=e359]: Recipe Finder App
+            - generic [ref=e360]:
+              - generic [ref=e361]: Framework
+              - generic [ref=e362]: Vue
+            - generic [ref=e363]:
+              - generic [ref=e364]: Pages
+              - generic [ref=e365]: Portfolio
+            - generic [ref=e366]:
+              - generic [ref=e367]: Description
+              - generic [ref=e368]: A recipe search and bookmarking application with categories and dietary filters
+      - generic [ref=e94]:
+        - button "Back" [ref=e98]:
+          - img [ref=e99]
+          - text: Back
+        - button "Create Project" [active] [ref=e369]:
+          - text: Create Project
+          - img [ref=e370]

@@ -1,0 +1,321 @@
+- generic [ref=e157]:
+  - complementary [ref=e158]:
+    - generic [ref=e161]:
+      - generic [ref=e162]:
+        - img [ref=e166]
+        - button "Expand sidebar" [ref=e957]:
+          - img [ref=e184]
+      - link [ref=e958] [cursor=pointer]:
+        - /url: /projects/new
+        - img [ref=e188]
+      - navigation [ref=e190]:
+        - link [ref=e959] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e194]
+        - link [ref=e960] [cursor=pointer]:
+          - /url: /projects
+          - img [ref=e202]
+      - generic [ref=e205]:
+        - link [ref=e961] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e208]
+        - button [ref=e962]:
+          - img [ref=e213]
+  - main [ref=e221]:
+    - generic [ref=e710]:
+      - generic [ref=e711]:
+        - generic [ref=e714]:
+          - generic [ref=e715]:
+            - img [ref=e717]
+            - generic [ref=e720]:
+              - heading "NexaStudio AI" [level=1] [ref=e721]
+              - paragraph [ref=e722]: Task Manager Pro
+          - button "Hide chat panel" [ref=e723]:
+            - img [ref=e724]
+        - generic [ref=e727]:
+          - generic [ref=e729]:
+            - paragraph [ref=e731]: "Build an analytics dashboard with: a collapsible sidebar with navigation links and user avatar; a top metric cards row showing key stats (revenue, users, growth, etc.) with trend indicators; a main chart area with a line/bar chart; a recent activity table with sortable columns; and a clean dark theme. Use a Modern Dark color theme. Use Glassmorphism design style. Use Framer Motion for all animations: page transitions with AnimatePresence, hover scale/glow effects, staggered list reveals with variants, and smooth micro-interactions. Wrap pages in motion.div with fade/slide transitions. Make sure to install these npm packages: framer-motion. Include Kanban board layout with draggable task cards, status columns (To Do, In Progress, Done), task filtering, and a sidebar with project categories"
+            - generic [ref=e733]: Just now
+          - generic [ref=e735]:
+            - generic [ref=e736]:
+              - img [ref=e738]
+              - generic [ref=e741]: NexaStudio AI
+              - generic [ref=e963]: 106.9s
+            - generic [ref=e742]:
+              - paragraph [ref=e964]: Generation completed.
+              - generic [ref=e965]:
+                - button "17 files changed +14 ~3" [expanded] [ref=e966]:
+                  - generic [ref=e967]:
+                    - img [ref=e968]
+                    - generic [ref=e973]: 17 files changed
+                  - generic [ref=e974]:
+                    - generic [ref=e975]: "+14"
+                    - generic [ref=e976]: ~3
+                    - img [ref=e977]
+                - generic [ref=e979]:
+                  - button "/package.json UPDATE" [ref=e980]:
+                    - img [ref=e982]
+                    - img [ref=e985]
+                    - generic [ref=e990]: /package.json
+                    - generic [ref=e991]: UPDATE
+                  - button "/src/index.css UPDATE" [ref=e992]:
+                    - img [ref=e994]
+                    - img [ref=e997]
+                    - generic [ref=e1001]: /src/index.css
+                    - generic [ref=e1002]: UPDATE
+                  - button "/src/main.tsx UPDATE" [ref=e1003]:
+                    - img [ref=e1005]
+                    - img [ref=e1008]
+                    - generic [ref=e1013]: /src/main.tsx
+                    - generic [ref=e1014]: UPDATE
+                  - button "/src/components/layout/DashboardLayout.tsx CREATE" [ref=e1015]:
+                    - img [ref=e1017]
+                    - img [ref=e1018]
+                    - generic [ref=e1023]: /src/components/layout/DashboardLayout.tsx
+                    - generic [ref=e1024]: CREATE
+                  - button "/src/pages/Dashboard.tsx CREATE" [ref=e1025]:
+                    - img [ref=e1027]
+                    - img [ref=e1028]
+                    - generic [ref=e1033]: /src/pages/Dashboard.tsx
+                    - generic [ref=e1034]: CREATE
+                  - button "/src/pages/KanbanBoard.tsx CREATE" [ref=e1035]:
+                    - img [ref=e1037]
+                    - img [ref=e1038]
+                    - generic [ref=e1043]: /src/pages/KanbanBoard.tsx
+                    - generic [ref=e1044]: CREATE
+                  - button "/src/components/ui/MetricCard.tsx CREATE" [ref=e1045]:
+                    - img [ref=e1047]
+                    - img [ref=e1048]
+                    - generic [ref=e1053]: /src/components/ui/MetricCard.tsx
+                    - generic [ref=e1054]: CREATE
+                  - button "/src/components/ui/ChartCard.tsx CREATE" [ref=e1055]:
+                    - img [ref=e1057]
+                    - img [ref=e1058]
+                    - generic [ref=e1063]: /src/components/ui/ChartCard.tsx
+                    - generic [ref=e1064]: CREATE
+                  - button "/src/components/ui/ActivityTable.tsx CREATE" [ref=e1065]:
+                    - img [ref=e1067]
+                    - img [ref=e1068]
+                    - generic [ref=e1073]: /src/components/ui/ActivityTable.tsx
+                    - generic [ref=e1074]: CREATE
+                  - button "/src/components/ui/Avatar.tsx CREATE" [ref=e1075]:
+                    - img [ref=e1077]
+                    - img [ref=e1078]
+                    - generic [ref=e1083]: /src/components/ui/Avatar.tsx
+                    - generic [ref=e1084]: CREATE
+                  - button "/src/components/ui/Badge.tsx CREATE" [ref=e1085]:
+                    - img [ref=e1087]
+                    - img [ref=e1088]
+                    - generic [ref=e1093]: /src/components/ui/Badge.tsx
+                    - generic [ref=e1094]: CREATE
+                  - button "/src/components/ui/Input.tsx CREATE" [ref=e1095]:
+                    - img [ref=e1097]
+                    - img [ref=e1098]
+                    - generic [ref=e1103]: /src/components/ui/Input.tsx
+                    - generic [ref=e1104]: CREATE
+                  - button "/src/components/ui/ScrollArea.tsx CREATE" [ref=e1105]:
+                    - img [ref=e1107]
+                    - img [ref=e1108]
+                    - generic [ref=e1113]: /src/components/ui/ScrollArea.tsx
+                    - generic [ref=e1114]: CREATE
+                  - button "/src/components/kanban/KanbanTaskCard.tsx CREATE" [ref=e1115]:
+                    - img [ref=e1117]
+                    - img [ref=e1118]
+                    - generic [ref=e1123]: /src/components/kanban/KanbanTaskCard.tsx
+                    - generic [ref=e1124]: CREATE
+                  - button "/src/components/ui/Select.tsx CREATE" [ref=e1125]:
+                    - img [ref=e1127]
+                    - img [ref=e1128]
+                    - generic [ref=e1133]: /src/components/ui/Select.tsx
+                    - generic [ref=e1134]: CREATE
+                  - button "/src/data/mockData.ts CREATE" [ref=e1135]:
+                    - img [ref=e1137]
+                    - img [ref=e1138]
+                    - generic [ref=e1143]: /src/data/mockData.ts
+                    - generic [ref=e1144]: CREATE
+                  - button "/src/types/kanban.d.ts CREATE" [ref=e1145]:
+                    - img [ref=e1147]
+                    - img [ref=e1148]
+                    - generic [ref=e1153]: /src/types/kanban.d.ts
+                    - generic [ref=e1154]: CREATE
+        - generic [ref=e777]:
+          - textbox "Describe what to build or change..." [ref=e778]
+          - generic [ref=e779]:
+            - paragraph [ref=e780]: Enter to send · Shift+Enter for new line
+            - button [disabled] [ref=e785]:
+              - img [ref=e1155]
+      - generic [ref=e788]:
+        - generic [ref=e789]:
+          - generic [ref=e791]:
+            - button "Preview" [ref=e792]:
+              - img [ref=e793]
+              - text: Preview
+            - button "Code" [ref=e796]:
+              - img [ref=e797]
+              - text: Code
+          - generic [ref=e1158]:
+            - button "desktop view" [ref=e1159]:
+              - img [ref=e1160]
+            - button "tablet view" [ref=e1162]:
+              - img [ref=e1163]
+            - button "mobile view" [ref=e1165]:
+              - img [ref=e1166]
+            - button "Refresh preview" [ref=e1169]:
+              - img [ref=e1170]
+          - generic [ref=e818]:
+            - button "Files 33" [ref=e1175]:
+              - img [ref=e820]
+              - generic [ref=e822]: Files
+              - generic [ref=e823]: "33"
+            - button "Export" [ref=e824]:
+              - img [ref=e825]
+              - generic [ref=e828]: Export
+        - generic [ref=e1178]:
+          - generic [ref=e1186]: localhost:3000
+          - iframe [active] [ref=e1189]:
+            - generic [ref=f5e189]:
+              - complementary [ref=f5e190]:
+                - generic [ref=f5e192]:
+                  - img [ref=f5e193]
+                  - generic [ref=f5e195]: NexaStudio
+                - navigation [ref=f5e196]:
+                  - link "Dashboard" [ref=f5e197] [cursor=pointer]:
+                    - /url: /dashboard
+                    - img [ref=f5e198]
+                    - generic [ref=f5e203]: Dashboard
+                  - link "Kanban Board" [ref=f5e204] [cursor=pointer]:
+                    - /url: /kanban
+                    - img [ref=f5e205]
+                    - generic [ref=f5e207]: Kanban Board
+                  - link "Analytics" [ref=f5e208] [cursor=pointer]:
+                    - /url: /analytics
+                    - img [ref=f5e209]
+                    - generic [ref=f5e210]: Analytics
+                  - link "Reports" [ref=f5e211] [cursor=pointer]:
+                    - /url: /reports
+                    - img [ref=f5e212]
+                    - generic [ref=f5e215]: Reports
+                  - link "Settings" [ref=f5e216] [cursor=pointer]:
+                    - /url: /settings
+                    - img [ref=f5e217]
+                    - generic [ref=f5e220]: Settings
+                - generic [ref=f5e222]:
+                  - img "User Avatar" [ref=f5e224]
+                  - generic [ref=f5e225]:
+                    - generic [ref=f5e226]: John Doe
+                    - generic [ref=f5e227]: johndoe@example.com
+              - main [ref=f5e229]:
+                - generic [ref=f5e231]:
+                  - generic [ref=f5e232]:
+                    - heading "Project Kanban" [level=1] [ref=f5e233]
+                    - paragraph [ref=f5e234]: Visualize and manage your tasks with drag-and-drop ease.
+                  - generic [ref=f5e237]:
+                    - generic [ref=f5e238]:
+                      - img [ref=f5e239]
+                      - textbox "Search tasks..." [ref=f5e242]
+                    - generic [ref=f5e243]:
+                      - button "All Categories" [ref=f5e244] [cursor=pointer]:
+                        - generic [ref=f5e245]: All Categories
+                        - img [ref=f5e246]
+                      - combobox [ref=f5e248]:
+                        - option "All Categories" [selected]
+                        - option "Design"
+                        - option "Development"
+                        - option "Marketing"
+                        - option "Bug"
+                  - generic [ref=f5e249]:
+                    - generic [ref=f5e250]:
+                      - heading "To Do (4)" [level=3] [ref=f5e251]:
+                        - text: To Do
+                        - generic [ref=f5e252]: (4)
+                      - generic [ref=f5e254]:
+                        - 'button "Implement Authentication Development Set up user registration, login, and session management using JWT. Due: 8/20/2024" [ref=f5e255] [cursor=pointer]':
+                          - generic [ref=f5e256]:
+                            - heading "Implement Authentication" [level=4] [ref=f5e257]
+                            - generic [ref=f5e258]: Development
+                          - paragraph [ref=f5e259]: Set up user registration, login, and session management using JWT.
+                          - generic [ref=f5e260]:
+                            - img [ref=f5e261]
+                            - generic [ref=f5e263]: "Due: 8/20/2024"
+                        - 'button "User Onboarding Flow Design Design and implement a smooth onboarding experience for new users. Due: 8/25/2024" [ref=f5e264] [cursor=pointer]':
+                          - generic [ref=f5e265]:
+                            - heading "User Onboarding Flow" [level=4] [ref=f5e266]
+                            - generic [ref=f5e267]: Design
+                          - paragraph [ref=f5e268]: Design and implement a smooth onboarding experience for new users.
+                          - generic [ref=f5e269]:
+                            - img [ref=f5e270]
+                            - generic [ref=f5e272]: "Due: 8/25/2024"
+                        - 'button "API Endpoint for Tasks Development Create RESTful API endpoints for CRUD operations on tasks. Due: 8/22/2024" [ref=f5e273] [cursor=pointer]':
+                          - generic [ref=f5e274]:
+                            - heading "API Endpoint for Tasks" [level=4] [ref=f5e275]
+                            - generic [ref=f5e276]: Development
+                          - paragraph [ref=f5e277]: Create RESTful API endpoints for CRUD operations on tasks.
+                          - generic [ref=f5e278]:
+                            - img [ref=f5e279]
+                            - generic [ref=f5e281]: "Due: 8/22/2024"
+                        - 'button "Fix Critical Bug in Reporting Bug Address the bug causing incorrect data to be displayed in the monthly reports. Due: 8/10/2024" [ref=f5e282] [cursor=pointer]':
+                          - generic [ref=f5e283]:
+                            - heading "Fix Critical Bug in Reporting" [level=4] [ref=f5e284]
+                            - generic [ref=f5e285]: Bug
+                          - paragraph [ref=f5e286]: Address the bug causing incorrect data to be displayed in the monthly reports.
+                          - generic [ref=f5e287]:
+                            - img [ref=f5e288]
+                            - generic [ref=f5e290]: "Due: 8/10/2024"
+                    - generic [ref=f5e291]:
+                      - heading "In Progress (4)" [level=3] [ref=f5e292]:
+                        - text: In Progress
+                        - generic [ref=f5e293]: (4)
+                      - generic [ref=f5e295]:
+                        - 'button "Design Dashboard Layout Design Create initial wireframes and high-fidelity mockups for the main dashboard interface. Due: 8/15/2024" [ref=f5e296] [cursor=pointer]':
+                          - generic [ref=f5e297]:
+                            - heading "Design Dashboard Layout" [level=4] [ref=f5e298]
+                            - generic [ref=f5e299]: Design
+                          - paragraph [ref=f5e300]: Create initial wireframes and high-fidelity mockups for the main dashboard interface.
+                          - generic [ref=f5e301]:
+                            - img [ref=f5e302]
+                            - generic [ref=f5e304]: "Due: 8/15/2024"
+                        - 'button "Develop Metric Cards Development Build reusable React components for displaying key performance indicators. Due: 8/18/2024" [ref=f5e305] [cursor=pointer]':
+                          - generic [ref=f5e306]:
+                            - heading "Develop Metric Cards" [level=4] [ref=f5e307]
+                            - generic [ref=f5e308]: Development
+                          - paragraph [ref=f5e309]: Build reusable React components for displaying key performance indicators.
+                          - generic [ref=f5e310]:
+                            - img [ref=f5e311]
+                            - generic [ref=f5e313]: "Due: 8/18/2024"
+                        - 'button "Marketing Campaign Strategy Marketing Develop a go-to-market strategy and initial campaign ideas for launch. Due: 9/1/2024" [ref=f5e314] [cursor=pointer]':
+                          - generic [ref=f5e315]:
+                            - heading "Marketing Campaign Strategy" [level=4] [ref=f5e316]
+                            - generic [ref=f5e317]: Marketing
+                          - paragraph [ref=f5e318]: Develop a go-to-market strategy and initial campaign ideas for launch.
+                          - generic [ref=f5e319]:
+                            - img [ref=f5e320]
+                            - generic [ref=f5e322]: "Due: 9/1/2024"
+                        - 'button "Setup CI/CD Pipeline Development Configure GitHub Actions for automated testing and deployment. Due: 8/28/2024" [ref=f5e323] [cursor=pointer]':
+                          - generic [ref=f5e324]:
+                            - heading "Setup CI/CD Pipeline" [level=4] [ref=f5e325]
+                            - generic [ref=f5e326]: Development
+                          - paragraph [ref=f5e327]: Configure GitHub Actions for automated testing and deployment.
+                          - generic [ref=f5e328]:
+                            - img [ref=f5e329]
+                            - generic [ref=f5e331]: "Due: 8/28/2024"
+                    - generic [ref=f5e332]:
+                      - heading "Done (2)" [level=3] [ref=f5e333]:
+                        - text: Done
+                        - generic [ref=f5e334]: (2)
+                      - generic [ref=f5e336]:
+                        - 'button "Database Schema Design Development Define tables, relationships, and indexing strategies for the PostgreSQL database. Due: 7/30/2024" [ref=f5e337] [cursor=pointer]':
+                          - generic [ref=f5e338]:
+                            - heading "Database Schema Design" [level=4] [ref=f5e339]
+                            - generic [ref=f5e340]: Development
+                          - paragraph [ref=f5e341]: Define tables, relationships, and indexing strategies for the PostgreSQL database.
+                          - generic [ref=f5e342]:
+                            - img [ref=f5e343]
+                            - generic [ref=f5e345]: "Due: 7/30/2024"
+                        - 'button "Refactor Utility Functions Development Review and improve existing utility functions for better performance and readability. Due: 7/28/2024" [ref=f5e346] [cursor=pointer]':
+                          - generic [ref=f5e347]:
+                            - heading "Refactor Utility Functions" [level=4] [ref=f5e348]
+                            - generic [ref=f5e349]: Development
+                          - paragraph [ref=f5e350]: Review and improve existing utility functions for better performance and readability.
+                          - generic [ref=f5e351]:
+                            - img [ref=f5e352]
+                            - generic [ref=f5e354]: "Due: 7/28/2024"

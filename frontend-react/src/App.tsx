@@ -127,8 +127,7 @@ export default function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/projects" element={<ProjectsListPage />} />
             <Route path="/projects/new" element={<NewProjectPage />} />
-            {/* Redirect project detail to generate page - v0-like experience */}
-            <Route path="/projects/:id" element={<Navigate to="generate" replace />} />
+            {/* Removed ambiguous Redirect project detail to generate page to fix circular match */}
             <Route path="/projects/:id/generate" element={<GeneratePage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>

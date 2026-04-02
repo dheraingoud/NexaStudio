@@ -1,0 +1,100 @@
+- generic [ref=e7]:
+  - complementary [ref=e8]:
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - img [ref=e16]
+          - generic [ref=e31]: NexaStudio
+        - button "Collapse sidebar" [ref=e32]:
+          - img [ref=e34]
+      - link "New Project" [ref=e36] [cursor=pointer]:
+        - /url: /projects/new
+        - generic [ref=e37]:
+          - img [ref=e38]
+          - generic [ref=e39]: New Project
+      - navigation [ref=e40]:
+        - link "Dashboard" [ref=e41] [cursor=pointer]:
+          - /url: /dashboard
+          - generic [ref=e42]:
+            - img [ref=e43]
+            - generic [ref=e48]: Dashboard
+        - link "Projects" [ref=e49] [cursor=pointer]:
+          - /url: /projects
+          - generic [ref=e50]:
+            - img [ref=e52]
+            - generic [ref=e54]: Projects
+      - generic [ref=e55]:
+        - link "Settings" [ref=e56] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e57]:
+            - img [ref=e58]
+            - generic [ref=e61]: Settings
+        - button "Logout" [ref=e62]:
+          - img [ref=e63]
+          - generic [ref=e66]: Logout
+      - generic [ref=e68]:
+        - generic [ref=e69]: D
+        - paragraph [ref=e70]: "@dheraingoud_"
+  - main [ref=e71]:
+    - generic [ref=e73]:
+      - button "Back" [ref=e74]:
+        - img [ref=e75]
+        - text: Back
+      - paragraph [ref=e79]: Step 2 of 4
+      - generic [ref=e98]:
+        - heading "Choose a framework" [level=1] [ref=e99]
+        - paragraph [ref=e100]: Pick the technology stack for your app.
+        - generic [ref=e101]:
+          - button "React Modern component-based UI library" [ref=e102]:
+            - generic [ref=e103]:
+              - img [ref=e104]
+              - generic [ref=e109]: React
+            - paragraph [ref=e110]: Modern component-based UI library
+          - button "Next.js Full-stack React with SSR & routing" [active] [ref=e111]:
+            - generic [ref=e112]:
+              - img [ref=e113]
+              - generic [ref=e117]: Next.js
+            - paragraph [ref=e118]: Full-stack React with SSR & routing
+            - img [ref=e177]
+          - button "Vue Progressive & approachable framework" [ref=e119]:
+            - generic [ref=e120]:
+              - img [ref=e121]
+              - generic [ref=e124]: Vue
+            - paragraph [ref=e125]: Progressive & approachable framework
+          - button "Angular Enterprise-grade TypeScript framework" [ref=e126]:
+            - generic [ref=e127]:
+              - img [ref=e128]
+              - generic [ref=e132]: Angular
+            - paragraph [ref=e133]: Enterprise-grade TypeScript framework
+          - button "SvelteKit Compiler-first with minimal boilerplate" [ref=e134]:
+            - generic [ref=e135]:
+              - img [ref=e136]
+              - generic [ref=e139]: SvelteKit
+            - paragraph [ref=e140]: Compiler-first with minimal boilerplate
+          - button "Astro Content-first with component islands" [ref=e141]:
+            - generic [ref=e142]:
+              - img [ref=e143]
+              - generic [ref=e147]: Astro
+            - paragraph [ref=e148]: Content-first with component islands
+          - button "SolidJS Fine-grained reactivity, no virtual DOM" [ref=e149]:
+            - generic [ref=e150]:
+              - img [ref=e151]
+              - generic [ref=e156]: SolidJS
+            - paragraph [ref=e157]: Fine-grained reactivity, no virtual DOM
+          - button "Remix Full-stack React with nested routing" [ref=e158]:
+            - generic [ref=e159]:
+              - img [ref=e160]
+              - generic [ref=e163]: Remix
+            - paragraph [ref=e164]: Full-stack React with nested routing
+          - button "Vanilla Plain HTML, CSS & JavaScript" [ref=e165]:
+            - generic [ref=e166]:
+              - img [ref=e167]
+              - generic [ref=e171]: Vanilla
+            - paragraph [ref=e172]: Plain HTML, CSS & JavaScript
+      - generic [ref=e94]:
+        - button "Back" [ref=e173]:
+          - img [ref=e174]
+          - text: Back
+        - button "Continue" [ref=e95]:
+          - text: Continue
+          - img [ref=e96]

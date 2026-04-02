@@ -613,11 +613,12 @@ export default function GeneratePage() {
 
       setMessages(historyMessages.length > 0 ? [...welcomeMessages, ...historyMessages] : welcomeMessages);
       setIsLoading(false);
-    }).catch(() => {
+    }).catch((err) => {
+      console.error("[GeneratePage] Load error:", err);
       clearTimeout(timeout);
       setIsLoading(false);
       loadedIdRef.current = null;
-      navigate('/projects');
+      // navigate('/projects');
     });
 
     return () => clearTimeout(timeout);
@@ -641,13 +642,20 @@ export default function GeneratePage() {
 
   useEffect(() => {
     const container = chatContainerRef.current;
-    if (!userScrolledUp.current && container) container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
-  }, [messages, thinkingStep]);
+    if (!container || userScrolledUp.current) return;
+    // Keep chat pinned only when user hasn't intentionally scrolled up.
+    container.scrollTop = container.scrollHeight;
+  }, [messages]);
 
   useEffect(() => {
     const container = chatContainerRef.current;
     if (!container) return;
-    const handleScroll = () => { const { scrollTop, scrollHeight, clientHeight } = container; userScrolledUp.current = scrollHeight - scrollTop - clientHeight > 100; };
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
+      // Treat any meaningful movement away from bottom as manual reading mode.
+      userScrolledUp.current = distanceFromBottom > 8;
+    };
     container.addEventListener('scroll', handleScroll, { passive: true });
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);

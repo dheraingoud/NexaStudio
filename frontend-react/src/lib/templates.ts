@@ -41,7 +41,7 @@ export const templates: ProjectTemplate[] = [
         description: 'Hero, features, testimonials, CTA & footer',
         icon: Layout,
         color: 'from-violet-500/20 to-indigo-600/15',
-        promptContext: 'Build a modern landing page with: a full-width gradient hero section with headline, subtext and CTA button; a features grid with icon cards (at least 6 features); a testimonials section with user avatars; a pricing section with 3 tiers; and a footer with social links and navigation columns.',
+        promptContext: 'Build an ultra-modern, high-end landing page. Include: a stunning full-width gradient hero section with an immersive glowing background, bold typography headline, subtext, and a sleek animated CTA button. Add a premium features grid using frosted glass cards with glowing borders and beautiful icons (at least 6 features). Add an elegant testimonials section with avatar images and subtle hover depth. Include a clear, beautiful pricing section (3 tiers) with an emphasized tier. Finish with a minimalist footer with social links. The design must be flawlessly responsive, using generous whitespace, perfect typography, and a polished, premium aesthetic that rivals top tech company sites.',
         tags: ['marketing', 'startup'],
     },
     {
@@ -50,7 +50,7 @@ export const templates: ProjectTemplate[] = [
         description: 'Sidebar, stats, charts & data tables',
         icon: BarChart3,
         color: 'from-emerald-500/20 to-teal-600/15',
-        promptContext: 'Build an analytics dashboard with: a collapsible sidebar with navigation links and user avatar; a top metric cards row showing key stats (revenue, users, growth, etc.) with trend indicators; a main chart area with a line/bar chart; a recent activity table with sortable columns; and a clean dark theme.',
+        promptContext: 'Build a sophisticated, next-generation analytics dashboard. Features: a sleek, collapsible sidebar with glowing active states and user profile. A top row of metric widgets featuring glassmorphism backgrounds, subtle drop shadows, and mini sparkline trend indicators. A gorgeous main chart area with a smooth line or bar chart. A recent activity data table with sortable columns, perfect alignment, and pill-shaped status badges. The entire layout must feel incredibly premium, using a dark theme with neon accents, ultra-refined borders, and smooth transitions on all interactive elements.',
         tags: ['analytics', 'admin'],
     },
     {
@@ -59,7 +59,7 @@ export const templates: ProjectTemplate[] = [
         description: 'Product grid, cart, detail & checkout',
         icon: ShoppingBag,
         color: 'from-amber-500/20 to-orange-600/15',
-        promptContext: 'Build an e-commerce storefront with: a top navigation bar with search, cart icon with item count; a product grid with image, title, price, and add-to-cart button for each product; a product detail page with image gallery, description, size/color selectors; a slide-out cart sidebar; and a responsive layout.',
+        promptContext: 'Build a luxurious, high-performance e-commerce storefront. Must include: an elegant sticky top navigation with search and a cart badge. A stunning product grid showcasing high-quality product cards with subtle image zoom on hover, minimal pricing text, and a sleek primary add-to-cart button. A beautifully laid out product detail view featuring an expansive image gallery, refined typography for descriptions, and chic size/color interactable selectors. Include a slide-out cart sidebar with smooth enter/exit animations. The overall vibe should be minimalist but highly engaging, similar to premium fashion or tech brand sites.',
         tags: ['store', 'products'],
     },
     {
@@ -68,7 +68,7 @@ export const templates: ProjectTemplate[] = [
         description: 'Project gallery, about & contact form',
         icon: Image,
         color: 'from-pink-500/20 to-rose-600/15',
-        promptContext: 'Build a creative portfolio website with: a minimal hero section with name and role; a filterable project gallery with hover effects; an about section with skills/tech stack; a contact form with name/email/message fields; smooth scroll navigation; and elegant typography.',
+        promptContext: 'Build an award-winning, creative developer/designer portfolio. Include: a minimalist hero section focusing on a massive, elegant headline and the creator\'s role with subtle gradient text. A visually arresting, filterable project gallery utilizing masonry layout and beautiful hover reveal effects for project details. A clean about section displaying skills inside pill-shaped tags or animated bars. A sleek contact form with floating labels and an elegant submit button. Navigation should use smooth scrolling. Ensure impeccable typography, lots of negative space, and absolute pixel perfection.',
         tags: ['personal', 'creative'],
     },
     {
@@ -77,7 +77,7 @@ export const templates: ProjectTemplate[] = [
         description: 'Post list, detail, categories & search',
         icon: BookOpen,
         color: 'from-cyan-500/20 to-blue-600/15',
-        promptContext: 'Build a blog with: a header with site title and navigation; a featured post hero; a post list with thumbnail image, title, excerpt, date, and read-time; category filter tabs; a search bar; a post detail page with rich text content, author info, and related posts; and a newsletter signup section.',
+        promptContext: 'Build a premium editorial blog platform. Features: a pristine header with site branding and navigation. A featured post hero component with an immersive dark overlay on the cover image and striking typography. A grid of recent posts where each article card has a gorgeous hover state lifting the card and highlighting the title. Include inline category pills, elegant author avatars, dates, and read-time indicators. Add a beautifully styled search bar and category filter tabs. The post detail page must focus heavily on readability with optimal line-height, beautiful blockquotes, and elegantly spaced typography.',
         tags: ['content', 'writing'],
     },
     {
@@ -86,7 +86,7 @@ export const templates: ProjectTemplate[] = [
         description: 'Pricing, features & auth pages',
         icon: Briefcase,
         color: 'from-blue-500/20 to-indigo-600/15',
-        promptContext: 'Build a SaaS marketing site with: a hero with app screenshot mockup and CTA; a feature comparison grid with check/cross indicators; a pricing table with 3 tiers (Free/Pro/Enterprise) with toggle for monthly/annual; an FAQ accordion section; social proof with logos; and a sticky header navigation.',
+        promptContext: 'Build a top-tier SaaS product marketing site. Essential elements: a powerful hero section that displays a floating, perspective-tilted mockup of the app UI. A stunning feature comparison grid with vibrant check/cross icons. A highly persuasive pricing table with 3 tiers (Free/Pro/Enterprise) complete with a sleek monthly/annual toggle pill. A refined FAQ accordion section with smooth height transitions. Add social proof via grayscale client logos that become colored on hover. The aesthetic must be exceptionally clean, modern, and trust-inspiring.',
         tags: ['product', 'business'],
     },
     {
@@ -95,7 +95,7 @@ export const templates: ProjectTemplate[] = [
         description: 'CRUD tables, forms & user management',
         icon: UserCog,
         color: 'from-slate-500/20 to-gray-600/15',
-        promptContext: 'Build an admin panel with: a sidebar with collapsible menu items (Dashboard, Users, Products, Settings); a data table with search, sort, pagination, and row selection; a create/edit form with validation; a user management page with role badges; breadcrumb navigation; and toast notifications.',
+        promptContext: 'Build a cutting-edge admin/internal tool interface. Must include: an ultra-clean sidebar navigation system. A robust data table utilizing minimal borders, alternating row subtle backgrounds, and action dropdown menus. Gorgeous form inputs with focus rings matching the brand accent color. A user management view displaying avatar images and role badges (like "Admin", "Editor"). Make sure to include breadcrumb navigation and floating toast notifications. Prioritize a pristine, noise-free layout that reduces cognitive load, heavily utilizing subtle grays for borders and vibrant colors exclusively for actions.',
         tags: ['management', 'internal'],
     },
 ];

@@ -1,0 +1,177 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e12]
+          - generic [ref=e27]: NexaStudio
+        - button "Collapse sidebar" [ref=e28]:
+          - img [ref=e30]
+      - link "New Project" [ref=e32] [cursor=pointer]:
+        - /url: /projects/new
+        - generic [ref=e33]:
+          - img [ref=e34]
+          - generic [ref=e35]: New Project
+      - navigation [ref=e36]:
+        - link "Dashboard" [ref=e37] [cursor=pointer]:
+          - /url: /dashboard
+          - generic [ref=e38]:
+            - img [ref=e40]
+            - generic [ref=e45]: Dashboard
+        - link "Projects" [active] [ref=e46] [cursor=pointer]:
+          - /url: /projects
+          - generic [ref=e47]:
+            - img [ref=e48]
+            - generic [ref=e50]: Projects
+      - generic [ref=e51]:
+        - link "Settings" [ref=e52] [cursor=pointer]:
+          - /url: /settings
+          - generic [ref=e53]:
+            - img [ref=e54]
+            - generic [ref=e57]: Settings
+        - button "Logout" [ref=e58]:
+          - img [ref=e59]
+          - generic [ref=e62]: Logout
+      - generic [ref=e64]:
+        - generic [ref=e65]: D
+        - paragraph [ref=e66]: "@dheraingoud_"
+  - main [ref=e67]:
+    - generic [ref=e279]:
+      - generic [ref=e280]:
+        - generic [ref=e281]:
+          - heading "Projects" [level=1] [ref=e282]
+          - paragraph [ref=e283]: 7 projects
+        - link "New Project" [ref=e284] [cursor=pointer]:
+          - /url: /projects/new
+          - button "New Project" [ref=e285]:
+            - img [ref=e286]
+            - text: New Project
+      - generic [ref=e287]:
+        - generic [ref=e290]:
+          - img [ref=e292]
+          - textbox "Search…" [ref=e295]
+        - generic [ref=e296]:
+          - generic [ref=e297]:
+            - button "All" [ref=e298]
+            - button "Vue" [ref=e299]
+            - button "Next.js" [ref=e300]
+            - button "React" [ref=e301]
+            - button "SvelteKit" [ref=e302]
+          - generic [ref=e303]:
+            - button "Grid view" [ref=e304]:
+              - img [ref=e305]
+            - button "List view" [ref=e307]:
+              - img [ref=e308]
+      - generic [ref=e309]:
+        - generic [ref=e310]:
+          - link "Vue Recipe Finder App A recipe search and bookmarking application with categories and dietary filters 19m ago" [ref=e311] [cursor=pointer]:
+            - /url: /projects/0ba5d6c9-d957-4e49-be98-78a677b67091
+            - generic [ref=e312]:
+              - generic [ref=e313]:
+                - img [ref=e314]
+                - generic [ref=e317]: Vue
+              - heading "Recipe Finder App" [level=3] [ref=e318]
+              - paragraph [ref=e319]: A recipe search and bookmarking application with categories and dietary filters
+              - generic [ref=e320]:
+                - generic [ref=e321]:
+                  - img [ref=e322]
+                  - text: 19m ago
+                - img [ref=e325]
+          - button "Delete Recipe Finder App" [ref=e328]:
+            - img [ref=e329]
+        - generic [ref=e332]:
+          - link "Next.js E-Commerce Store Full-featured online store with product catalog, shopping cart, and checkout 28m ago" [ref=e333] [cursor=pointer]:
+            - /url: /projects/cb37518c-8534-4398-8223-8f2181f6117f
+            - generic [ref=e334]:
+              - generic [ref=e335]:
+                - img [ref=e336]
+                - generic [ref=e340]: Next.js
+              - heading "E-Commerce Store" [level=3] [ref=e341]
+              - paragraph [ref=e342]: Full-featured online store with product catalog, shopping cart, and checkout
+              - generic [ref=e343]:
+                - generic [ref=e344]:
+                  - img [ref=e345]
+                  - text: 28m ago
+                - img [ref=e348]
+          - button "Delete E-Commerce Store" [ref=e351]:
+            - img [ref=e352]
+        - generic [ref=e355]:
+          - link "React Task Manager Pro A full-featured task management app with drag-and-drop, categories, and dark mode 33m ago" [ref=e356] [cursor=pointer]:
+            - /url: /projects/653c4573-10b1-4472-af2a-d5e5aab63d13
+            - generic [ref=e357]:
+              - generic [ref=e358]:
+                - img [ref=e359]
+                - generic [ref=e364]: React
+              - heading "Task Manager Pro" [level=3] [ref=e365]
+              - paragraph [ref=e366]: A full-featured task management app with drag-and-drop, categories, and dark mode
+              - generic [ref=e367]:
+                - generic [ref=e368]:
+                  - img [ref=e369]
+                  - text: 33m ago
+                - img [ref=e372]
+          - button "Delete Task Manager Pro" [ref=e375]:
+            - img [ref=e376]
+        - generic [ref=e379]:
+          - link "SvelteKit E-Commerce Platform Full-stack e-commerce with payment integration 18h ago" [ref=e380] [cursor=pointer]:
+            - /url: /projects/cf593133-9833-4dda-85b3-6ff8410b1ff1
+            - generic [ref=e381]:
+              - generic [ref=e382]:
+                - img [ref=e383]
+                - generic [ref=e386]: SvelteKit
+              - heading "E-Commerce Platform" [level=3] [ref=e387]
+              - paragraph [ref=e388]: Full-stack e-commerce with payment integration
+              - generic [ref=e389]:
+                - generic [ref=e390]:
+                  - img [ref=e391]
+                  - text: 18h ago
+                - img [ref=e394]
+          - button "Delete E-Commerce Platform" [ref=e397]:
+            - img [ref=e398]
+        - generic [ref=e401]:
+          - link "React E-Commerce Platform Full-stack e-commerce with payment integration 18h ago" [ref=e402] [cursor=pointer]:
+            - /url: /projects/b5a10a4c-01e9-47bb-b2a0-b0d12a1cec91
+            - generic [ref=e403]:
+              - generic [ref=e404]:
+                - img [ref=e405]
+                - generic [ref=e410]: React
+              - heading "E-Commerce Platform" [level=3] [ref=e411]
+              - paragraph [ref=e412]: Full-stack e-commerce with payment integration
+              - generic [ref=e413]:
+                - generic [ref=e414]:
+                  - img [ref=e415]
+                  - text: 18h ago
+                - img [ref=e418]
+          - button "Delete E-Commerce Platform" [ref=e421]:
+            - img [ref=e422]
+        - generic [ref=e425]:
+          - link "React E-commerce Dashboard A modern admin dashboard for managing products and orders 19h ago" [ref=e426] [cursor=pointer]:
+            - /url: /projects/a88759d1-9372-41bc-904e-71ac3ce463f2
+            - generic [ref=e427]:
+              - generic [ref=e428]:
+                - img [ref=e429]
+                - generic [ref=e434]: React
+              - heading "E-commerce Dashboard" [level=3] [ref=e435]
+              - paragraph [ref=e436]: A modern admin dashboard for managing products and orders
+              - generic [ref=e437]:
+                - generic [ref=e438]:
+                  - img [ref=e439]
+                  - text: 19h ago
+                - img [ref=e442]
+          - button "Delete E-commerce Dashboard" [ref=e445]:
+            - img [ref=e446]
+        - generic [ref=e449]:
+          - link "React Hotstar clone No description 19h ago" [ref=e450] [cursor=pointer]:
+            - /url: /projects/5b54e750-0a39-4da4-aa20-b0616b286f34
+            - generic [ref=e451]:
+              - generic [ref=e452]:
+                - img [ref=e453]
+                - generic [ref=e458]: React
+              - heading "Hotstar clone" [level=3] [ref=e459]
+              - paragraph [ref=e460]: No description
+              - generic [ref=e461]:
+                - generic [ref=e462]:
+                  - img [ref=e463]
+                  - text: 19h ago
+                - img [ref=e466]
+          - button "Delete Hotstar clone" [ref=e469]:
+            - img [ref=e470]
