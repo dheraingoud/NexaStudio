@@ -43,8 +43,6 @@ public class OrchestratorService {
     private final RateLimitService rateLimitService;
 
     private static final int MAX_RETRIES = 3;
-    private static final int MAX_PATH_LENGTH = 500;
-    private static final int MAX_FILE_NAME_LENGTH = 100;
 
     public OrchestratorService(ProjectService projectService, AiRouterService aiRouter,
                                ContextBuilder contextBuilder, PromptTemplates promptTemplates,
@@ -227,17 +225,11 @@ public class OrchestratorService {
 
             // Apply changes one-by-one, emitting each file as it's saved
             List<GenerateResponse.FileChange> changes = new ArrayList<>();
-            List<String> writeErrors = new ArrayList<>();
             if (output.getFiles() != null) {
                 for (FileOperation fileOp : output.getFiles()) {
-                    String path = normalizePath(fileOp.getPath());
+                    String path = fileOp.getPath();
                     String action = fileOp.getAction().toUpperCase();
                     String content = schemaValidator.sanitizeContent(fileOp.getContent());
-
-                    if (path == null) {
-                        writeErrors.add("Invalid or unsupported file path from AI output");
-                        continue;
-                    }
 
                     try {
                         switch (action) {
@@ -246,12 +238,10 @@ public class OrchestratorService {
                                         .orElse(FileEntity.builder()
                                                 .project(project)
                                                 .path(path)
-                                                .name(truncateFileName(extractFileName(path)))
                                                 .build());
                                 file.setContent(content);
-                                file.setName(truncateFileName(extractFileName(path)));
                                 file.setGenerated(true);
-                                fileRepository.save(file);
+                                fileRepository.saveAndFlush(file);
                                 log.info("Applied {} to file: {}", action, path);
                             }
                             case "DELETE" -> {
@@ -263,10 +253,6 @@ public class OrchestratorService {
                                             }
                                         });
                             }
-                                    default -> {
-                                        writeErrors.add("Unsupported action '" + action + "' for " + path);
-                                        continue;
-                                    }
                         }
 
                         GenerateResponse.FileChange change = GenerateResponse.FileChange.builder()
@@ -281,15 +267,9 @@ public class OrchestratorService {
                         emitter.accept(new SseEvent("file", change));
 
                     } catch (Exception e) {
-                        String error = "Failed to apply change to " + path + ": " + e.getMessage();
-                        log.error(error);
-                        writeErrors.add(error);
+                        log.error("Failed to apply change to file {}: {}", path, e.getMessage());
                     }
                 }
-            }
-
-            if (!writeErrors.isEmpty()) {
-                throw new AiGenerationException("Failed to save generated files: " + String.join(" | ", writeErrors));
             }
 
             // Update project
@@ -374,13 +354,9 @@ public class OrchestratorService {
         }
 
         for (FileOperation fileOp : output.getFiles()) {
-            String path = normalizePath(fileOp.getPath());
+            String path = fileOp.getPath();
             String action = fileOp.getAction().toUpperCase();
             String content = schemaValidator.sanitizeContent(fileOp.getContent());
-
-            if (path == null) {
-                throw new AiGenerationException("AI output included an invalid file path");
-            }
 
             try {
                 switch (action) {
@@ -389,13 +365,11 @@ public class OrchestratorService {
                                 .orElse(FileEntity.builder()
                                         .project(project)
                                         .path(path)
-                                        .name(truncateFileName(extractFileName(path)))
                                         .build());
 
                         file.setContent(content);
-                        file.setName(truncateFileName(extractFileName(path)));
                         file.setGenerated(true);
-                        fileRepository.save(file);
+                        fileRepository.saveAndFlush(file);
 
                         log.info("Applied {} to file: {}", action, path);
                     }
@@ -408,7 +382,6 @@ public class OrchestratorService {
                                     }
                                 });
                     }
-                    default -> throw new AiGenerationException("Unsupported file action: " + action);
                 }
 
                 changes.add(GenerateResponse.FileChange.builder()
@@ -419,60 +392,11 @@ public class OrchestratorService {
                         .build());
 
             } catch (Exception e) {
-                throw new AiGenerationException("Failed to apply change to file " + path + ": " + e.getMessage(), e);
+                log.error("Failed to apply change to file {}: {}", path, e.getMessage());
             }
         }
 
         return changes;
-    }
-
-    private String normalizePath(String rawPath) {
-        if (rawPath == null) {
-            return null;
-        }
-
-        String normalized = rawPath.trim().replace('\\', '/').replaceAll("/{2,}", "/");
-        if (normalized.isEmpty()) {
-            return null;
-        }
-
-        if (!normalized.startsWith("/")) {
-            normalized = "/" + normalized;
-        }
-
-        if (normalized.length() > MAX_PATH_LENGTH) {
-            log.warn("Skipping file path longer than {} chars: {}", MAX_PATH_LENGTH, normalized);
-            return null;
-        }
-
-        return normalized;
-    }
-
-    private String extractFileName(String path) {
-        int lastSlash = path.lastIndexOf('/');
-        if (lastSlash < 0 || lastSlash == path.length() - 1) {
-            return path;
-        }
-        return path.substring(lastSlash + 1);
-    }
-
-    private String truncateFileName(String fileName) {
-        if (fileName == null || fileName.isBlank()) {
-            return "file";
-        }
-
-        if (fileName.length() <= MAX_FILE_NAME_LENGTH) {
-            return fileName;
-        }
-
-        int dotIndex = fileName.lastIndexOf('.');
-        if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
-            String extension = fileName.substring(dotIndex);
-            int baseMax = Math.max(1, MAX_FILE_NAME_LENGTH - extension.length());
-            return fileName.substring(0, baseMax) + extension;
-        }
-
-        return fileName.substring(0, MAX_FILE_NAME_LENGTH);
     }
 
     /**

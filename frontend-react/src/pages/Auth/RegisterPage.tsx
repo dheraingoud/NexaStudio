@@ -96,8 +96,8 @@ export default function RegisterPage() {
     setIsLoading(true);
     try {
       const { data } = await authApi.register(username, password);
-      login({ id: data.user.id, username: data.user.username }, data.accessToken, data.refreshToken);
-      navigate('/dashboard', { replace: true });
+      login({ id: data.user.id, username: data.user.username }, data.accessToken);
+      navigate('/dashboard');
     } catch (err) {
       setError(getErrorMessage(err));
     } finally {

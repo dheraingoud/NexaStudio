@@ -45,7 +45,7 @@ function ProjectCard({ project, view, onDelete }: ProjectCardProps) {
     return (
       <motion.div variants={rise}>
         <GlassCard hover className="p-4 flex items-center gap-4 group">
-          <Link to={`/projects/${project.id}/generate`} className="flex items-center gap-4 flex-1 min-w-0">
+          <Link to={`/projects/${project.id}`} className="flex items-center gap-4 flex-1 min-w-0">
             <FrameworkIcon framework={framework} size={22} />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-lilac-100 truncate group-hover:text-mauve-300 transition-colors">
@@ -75,7 +75,7 @@ function ProjectCard({ project, view, onDelete }: ProjectCardProps) {
 
   return (
     <motion.div variants={rise} className="relative group">
-      <Link to={`/projects/${project.id}/generate`}>
+      <Link to={`/projects/${project.id}`}>
         <GlassCard hover className="p-5 h-full flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <FrameworkIcon framework={framework} size={28} />
