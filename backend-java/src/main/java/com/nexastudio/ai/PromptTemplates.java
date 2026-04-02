@@ -100,7 +100,17 @@ public class PromptTemplates {
                                         - /lib — Utility functions, API clients, constants
                                         - /hooks — Custom React hooks
                                         - /types — TypeScript type definitions
-                                        - /public — Static assets""";
+                                        - /public — Static assets
+
+                                        ## Import Path Rules (CRITICAL)
+                                        ALWAYS use absolute imports with @/ prefix. NEVER use relative imports like ./ or ../
+                                        Examples:
+                                        - import { Button } from '@/components/Button'
+                                        - import { CartProvider } from '@/components/cart/CartProvider'
+                                        - import { cn } from '@/lib/utils'
+                                        - import type { Product } from '@/types/product'
+                                        WRONG: import { Button } from './Button' or '../components/Button'
+                                        CORRECT: import { Button } from '@/components/Button'""";
                         case REACT -> """
                                         ## Technical Stack
                                         - React 18+ with functional components exclusively

@@ -169,6 +169,16 @@ export default function GeneratePage() {
   const [copied, setCopied] = useState(false);
   const userScrolledUp = useRef(false);
 
+  // Update page title with project name
+  useEffect(() => {
+    if (currentProject?.name) {
+      document.title = `${currentProject.name} - NexaStudio`;
+    }
+    return () => {
+      document.title = 'NexaStudio';
+    };
+  }, [currentProject?.name]);
+
   // Thinking step animator
   useEffect(() => {
     if (!isGenerating) { setThinkingStep(0); return; }

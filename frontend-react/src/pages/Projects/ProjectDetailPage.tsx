@@ -147,6 +147,16 @@ export default function ProjectDetailPage() {
     load();
   }, [id, setCurrentProject]);
 
+  // Update page title with project name
+  useEffect(() => {
+    if (currentProject?.name) {
+      document.title = `${currentProject.name} - NexaStudio`;
+    }
+    return () => {
+      document.title = 'NexaStudio';
+    };
+  }, [currentProject?.name]);
+
   // load file content when selection changes
   useEffect(() => {
     if (!id || !selectedFile) return;
